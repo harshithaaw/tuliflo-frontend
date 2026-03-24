@@ -92,7 +92,7 @@ function Dashboard() {
 
     try {
 
-      const fullUrl = `http://localhost:5173/gift/${shareableLink}`
+      const fullUrl = `https://tuliflo-frontend.vercel.app/gift/${shareableLink}`
 
       await navigator.clipboard.writeText(fullUrl)
 

@@ -70,7 +70,7 @@ function CreateGift() {
 
   const copyToClipboard = async () => {
     try {
-      const fullUrl = `http://localhost:5173/gift/${shareableLink}`;  // ✅ Build full URL
+      const fullUrl = `https://tuliflo-frontend.vercel.app/gift/${shareableLink}`;  // ✅ Build full URL
       await navigator.clipboard.writeText(fullUrl);
       alert("Link copied to clipboard!");
     } catch (err) {
@@ -138,7 +138,7 @@ function CreateGift() {
             >
               Shareable Link:
             </p>
-            <p style={{ color: "#4ecdc4", fontSize: "16px", margin: 0, fontWeight: "600" }}>http://localhost:5173/gift/{shareableLink}</p>
+            <p style={{ color: "#4ecdc4", fontSize: "16px", margin: 0, fontWeight: "600" }}>https://tuliflo-frontend.vercel.app/gift/{shareableLink}</p>
           </div>
           <div
             style={{
