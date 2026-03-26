@@ -149,9 +149,6 @@ function GiftReveal({ giftData }) {
           spotifyUrl={giftData.spotifyUrl}
           songName={giftData.songName}
           artistName={giftData.artistName}
-          isExpanded={activeCard === "vinyl"}
-          onExpand={() => setActiveCard("vinyl")}
-          onCollapse={() => setActiveCard(null)}
         />
       </div>
     </div>

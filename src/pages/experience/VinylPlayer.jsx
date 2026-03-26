@@ -1,195 +1,197 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 import vinylImg from "../../assets/vinyl.png"
 
-function VinylPlayer({ spotifyUrl, songName, artistName, isExpanded, onExpand, onCollapse }) {
+// ── Detect URL type ───────────────────────────────────────────────────────────
+const getYouTubeId = (url) => {
+  if (!url) return null
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/)
+  return match ? match[1] : null
+}
 
+function VinylPlayer({ spotifyUrl, songName, artistName }) {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const audioRef = useRef(null)
+  const iframeRef = useRef(null)
 
-  if (isExpanded) {
-    return (
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          backgroundColor: "#0a0a1f",
-          zIndex: 1000,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "20px",
-        }}
-      >
-        {/* Close button */}
-        <button
-          onClick={onCollapse}
-          style={{
-            position: "absolute",
-            top: "20px",
-            right: "20px",
-            backgroundColor: "rgba(255,255,255,0.1)",
-            border: "1px solid rgba(255,255,255,0.2)",
-            color: "rgba(255,255,255,0.8)",
-            padding: "8px 16px",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontSize: "14px",
-            transition: "all 0.2s",
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = "rgba(255,255,255,0.2)"
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = "rgba(255,255,255,0.1)"
-          }}
-        >
-          Close
-        </button>
+  const youtubeId = getYouTubeId(spotifyUrl || "")
+  const isYoutube = !!youtubeId
+  const isCloudinary = !isYoutube && !!spotifyUrl
 
-        {/* Large vinyl disc */}
-        <motion.img
-          src={vinylImg}
-          alt="Vinyl disc"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 3, ease: "linear", repeat: Infinity }}
-          style={{
-            width: "300px",
-            height: "300px",
-            marginBottom: "30px",
-            filter: "drop-shadow(0 8px 32px rgba(0,0,0,0.4))",
-          }}
-        />
+  // ── Cleanup Cloudinary audio on unmount ───────────────────────────────────
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current = null
+      }
+    }
+  }, [])
 
-        {/* Song info */}
-        <div
-          style={{
-            textAlign: "center",
-            marginBottom: "30px",
-            color: "rgba(255,255,255,0.9)",
-          }}
-        >
-          <h2
-            style={{
-              fontSize: "24px",
-              fontWeight: "600",
-              margin: "0 0 8px 0",
-              color: "rgba(255,255,255,0.95)",
-            }}
-          >
-            {songName}
-          </h2>
-          <p
-            style={{
-              fontSize: "18px",
-              margin: 0,
-              color: "rgba(255,255,255,0.7)",
-            }}
-          >
-            {artistName}
-          </p>
-        </div>
-
-        {/* Spotify embed */}
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "600px",
-            height: "152px",
-            backgroundColor: "rgba(255,255,255,0.05)",
-            borderRadius: "12px",
-            overflow: "hidden",
-            border: "1px solid rgba(255,255,255,0.1)",
-          }}
-        >
-          <iframe
-            src={spotifyUrl.replace('open.spotify.com/track/', 'open.spotify.com/embed/track/')}
-            width="100%"
-            height="152"
-            frameBorder="0"
-            allowTransparency="true"
-            allow="encrypted-media"
-            style={{
-              border: "none",
-            }}
-          />
-        </div>
-      </div>
+  // ── Send command to YouTube iframe via postMessage ────────────────────────
+  // enablejsapi=1 on the iframe src allows these commands to work
+  const sendYoutubeCommand = (func) => {
+    if (!iframeRef.current) return
+    iframeRef.current.contentWindow.postMessage(
+      JSON.stringify({ event: "command", func, args: [] }),
+      "*"
     )
   }
 
-  // Collapsed state - small card
-  return (
-    <div
-      style={{
-        backgroundColor: "#0a0a1f",
-        padding: "20px",
-        borderRadius: "16px",
-        border: "1px solid rgba(255,255,255,0.1)",
-        cursor: "pointer",
-        transition: "all 0.3s",
-        textAlign: "center",
-        maxWidth: "200px",
-      }}
-      onClick={onExpand}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-4px)"
-        e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.3)"
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0)"
-        e.currentTarget.style.boxShadow = "none"
-      }}
-    >
-      {/* Small rotating vinyl disc */}
-      <motion.img
-          src={vinylImg}
-          alt="Vinyl disc"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 3, ease: "linear", repeat: Infinity }}
-        style={{
-          width: "120px",
-          height: "120px",
-          marginBottom: "12px",
-          filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.3))",
-        }}
-      />
+  // ── Cloudinary click handler ──────────────────────────────────────────────
+  const handleCloudinaryClick = () => {
+    if (!spotifyUrl) return
 
-      {/* Song info */}
+    if (!audioRef.current) {
+      audioRef.current = new Audio(spotifyUrl)
+      audioRef.current.loop = true
+      audioRef.current.onended = () => setIsPlaying(false)
+      audioRef.current.onerror = () => {
+        setIsPlaying(false)
+        audioRef.current = null
+      }
+    }
+
+    if (isPlaying) {
+      audioRef.current.pause()   // pause() keeps position — resume works ✅
+      setIsPlaying(false)
+    } else {
+      audioRef.current.play().catch(() => setIsPlaying(false))
+      setIsPlaying(true)
+    }
+  }
+
+  // ── YouTube click handler ─────────────────────────────────────────────────
+  const handleYoutubeClick = () => {
+    if (isPlaying) {
+      sendYoutubeCommand("pauseVideo")  // pause at current position ✅
+      setIsPlaying(false)
+    } else {
+      sendYoutubeCommand("playVideo")   // resume from same position ✅
+      setIsPlaying(true)
+    }
+  }
+
+  const handleClick = () => {
+    if (isYoutube) handleYoutubeClick()
+    else handleCloudinaryClick()
+  }
+
+  return (
+    <>
+      {/* ── Vinyl Card ───────────────────────────────────────────────────── */}
       <div
+        onClick={handleClick}
         style={{
-          color: "rgba(255,255,255,0.9)",
+          cursor: spotifyUrl ? "pointer" : "default",
+          transition: "all 0.3s",
+          textAlign: "center",
+          width: "250px",
+          userSelect: "none",
+          position: "relative",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "translateY(-4px)"
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translateY(0)"
         }}
       >
-        <h3
+        <motion.img
+          src={vinylImg}
+          alt="Vinyl disc"
+          animate={{ rotate: isPlaying ? 360 : 0 }}
+          transition={
+            isPlaying
+              ? { duration: 3, ease: "linear", repeat: Infinity }
+              : { duration: 0.5, ease: "easeOut" }
+          }
           style={{
-            fontSize: "14px",
-            fontWeight: "600",
-            margin: "0 0 4px 0",
-            color: "rgba(255,255,255,0.95)",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
+            width: "300px",
+            height: "340px",
+            filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.4))",
+            display: "block",
+            margin: "0 auto 34px auto",
           }}
-        >
-          {songName}
-        </h3>
-        <p
-          style={{
-            fontSize: "12px",
-            margin: 0,
-            color: "rgba(255,255,255,0.6)",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
-          {artistName}
+        />
+
+        {/* Text and YouTube button container */}
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "8px",
+          marginLeft: "14px",
+          marginBottom: "4px",
+          marginTop: "10px"
+        }}>
+          <h3 style={{
+            fontSize: "24px", fontWeight: "600", margin: 0,
+            color: "rgb(246, 156, 166)", whiteSpace: "nowrap",
+            overflow: "hidden", textOverflow: "ellipsis",
+          }}>
+            {songName || "Unknown Song"}
+          </h3>
+          <p style={{
+            fontSize: "24px", margin: 0,
+            color: "rgb(246, 156, 166)", whiteSpace: "nowrap",
+            overflow: "hidden", textOverflow: "ellipsis",
+          }}>
+            {artistName || "Unknown Artist"}
+          </p>
+
+          {/* YouTube button */}
+          {isYoutube && (
+            <div style={{
+              display: "flex", alignItems: "center", justifyContent: "center",
+              backgroundColor: "rgba(255,0,0,0.15)",
+              border: "1px solid rgba(255,80,80,0.3)",
+              borderRadius: "6px", padding: "4px 8px",
+              minWidth: "32px", height: "24px",
+            }}>
+              <span style={{ color: "#ff4444", fontSize: "16px" }}>
+                {isPlaying ? "⏸" : "▶"}
+              </span>
+            </div>
+          )}
+        </div>
+
+        <p style={{
+          fontSize: "11px",
+          color: isPlaying ? "rgba(100,220,150,0.9)" : "rgba(255,255,255,0.3)",
+          margin: 0, transition: "color 0.3s",
+        }}>
+          {!spotifyUrl
+            ? "No song linked"
+            : isPlaying ? "▶ Playing — tap to stop" : "Tap to play"}
         </p>
       </div>
-    </div>
+
+      {/* ── YouTube iframe — ALWAYS in DOM, never destroyed ──────────────────
+           Key decisions:
+           - autoplay=0   → we control play/pause via postMessage, not on load
+           - enablejsapi=1 → required for postMessage commands to work
+           - Positioned way off-screen (not display:none) so iframe stays active
+           - Never unmounted = song position is preserved on pause/resume       */}
+      {isYoutube && youtubeId && (
+        <iframe
+          ref={iframeRef}
+          src={`https://www.youtube.com/embed/${youtubeId}?enablejsapi=1&autoplay=0&controls=0`}
+          style={{
+            position: "fixed",
+            top: "-9999px",
+            left: "-9999px",
+            width: "1px",
+            height: "1px",
+            opacity: 0,
+            pointerEvents: "none",
+          }}
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          title="Background YouTube audio"
+        />
+      )}
+    </>
   )
 }
 
