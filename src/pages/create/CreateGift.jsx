@@ -83,7 +83,7 @@ function CreateGift() {
       <div
         style={{
           minHeight: "100vh",
-          backgroundColor: "#0a0a1f",
+          backgroundColor: "#102b1f",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -93,7 +93,7 @@ function CreateGift() {
       >
         <div
           style={{
-            backgroundColor: "rgba(255,255,255,0.1)",
+            backgroundColor: "#f5f0e8",
             padding: "40px",
             borderRadius: "16px",
             textAlign: "center",
@@ -103,7 +103,7 @@ function CreateGift() {
         >
           <h2
             style={{
-              color: "#4ecdc4",
+              color: "#4d0011",
               fontSize: "32px",
               marginBottom: "20px",
             }}
@@ -112,7 +112,7 @@ function CreateGift() {
           </h2>
           <p
             style={{
-              color: "white",
+              color: "#4d0011",
               fontSize: "18px",
               marginBottom: "20px",
               lineHeight: "1.5",
@@ -122,7 +122,7 @@ function CreateGift() {
           </p>
           <div
             style={{
-              backgroundColor: "rgba(255,255,255,0.05)",
+              backgroundColor: "#ffd9d9",
               padding: "15px",
               borderRadius: "8px",
               marginBottom: "20px",
@@ -131,14 +131,14 @@ function CreateGift() {
           >
             <p
               style={{
-                color: "rgba(255,255,255,0.8)",
+                color: "#4d0011",
                 fontSize: "14px",
                 margin: "0 0 10px 0",
               }}
             >
               Shareable Link:
             </p>
-            <p style={{ color: "#4ecdc4", fontSize: "16px", margin: 0, fontWeight: "600" }}>https://tuliflo-frontend.vercel.app/gift/{shareableLink}</p>
+            <p style={{ color: "white", fontSize: "16px", margin: 0, fontWeight: "600" }}>https://tuliflo-frontend.vercel.app/gift/{shareableLink}</p>
           </div>
           <div
             style={{
@@ -150,9 +150,9 @@ function CreateGift() {
             <button
               onClick={copyToClipboard}
               style={{
-                backgroundColor: "#4ecdc4",
+                backgroundColor: "#6b0016",
                 border: "none",
-                color: "#0a0a1f",
+                color: "#4d0011",
                 padding: "12px 24px",
                 borderRadius: "25px",
                 fontSize: "16px",
@@ -162,7 +162,7 @@ function CreateGift() {
               }}
               onMouseEnter={(e) => {
                 e.target.style.transform = "translateY(-2px)"
-                e.target.style.boxShadow = "0 4px 16px rgba(78,205,196,0.3)"
+                e.target.style.boxShadow = "0 4px 16px rgba(107,0,22,0.3)"
               }}
               onMouseLeave={(e) => {
                 e.target.style.transform = "translateY(0)"
@@ -175,8 +175,8 @@ function CreateGift() {
               onClick={resetForm}
               style={{
                 backgroundColor: "rgba(255,255,255,0.1)",
-                border: "2px solid rgba(255,255,255,0.2)",
-                color: "white",
+                boxShadow: "0 4px 12px rgba(189, 120, 128, 0.3)",
+                color: "#4d0011",
                 padding: "12px 24px",
                 borderRadius: "25px",
                 fontSize: "16px",
@@ -277,7 +277,7 @@ function CreateGift() {
         <div style={{ marginBottom: "20px" }}>
           <label
             style={{
-              color: "white",
+              color: "#4d0011",
               fontSize: "18px",
               marginBottom: "8px",
               display: "block",
@@ -293,10 +293,10 @@ function CreateGift() {
               width: "100%",
               minHeight: "120px",
               padding: "12px",
-              backgroundColor: "rgba(255,255,255,0.1)",
-              border: "1px solid rgba(255,255,255,0.2)",
+              backgroundColor: "#f5f0e8",
+              border: "1px solid #bd7880",
               borderRadius: "8px",
-              color: "white",
+              color: "#4d0011",
               fontSize: "16px",
               fontFamily: "'Caveat', cursive",
               resize: "vertical",
@@ -308,7 +308,7 @@ function CreateGift() {
         <div style={{ marginBottom: "20px" }}>
           <label
             style={{
-              color: "white",
+              color: "#4d0011",
               fontSize: "18px",
               marginBottom: "8px",
               display: "block",
@@ -324,10 +324,10 @@ function CreateGift() {
             style={{
               width: "100%",
               padding: "12px",
-              backgroundColor: "rgba(255,255,255,0.1)",
-              border: "1px solid rgba(255,255,255,0.2)",
+              backgroundColor: "#f5f0e8",
+              border: "1px solid #bd7880",
               borderRadius: "8px",
-              color: "white",
+              color: "#4d0011",
               fontSize: "16px",
             }}
           />
@@ -337,7 +337,7 @@ function CreateGift() {
         <div style={{ marginBottom: "20px" }}>
           <label
             style={{
-              color: "white",
+              color: "#4d0011",
               fontSize: "18px",
               marginBottom: "8px",
               display: "block",
@@ -352,10 +352,10 @@ function CreateGift() {
             style={{
               width: "100%",
               padding: "12px",
-              backgroundColor: "rgba(255,255,255,0.1)",
-              border: "1px solid rgba(255,255,255,0.2)",
+              backgroundColor: "#f5f0e8",
+              border: "1px solid #bd7880",
               borderRadius: "8px",
-              color: "white",
+              color: "#4d0011",
               fontSize: "16px",
             }}
           />
@@ -365,7 +365,7 @@ function CreateGift() {
         <div style={{ marginBottom: "20px" }}>
           <label
             style={{
-              color: "white",
+              color: "#4d0011",
               fontSize: "18px",
               marginBottom: "8px",
               display: "block",
@@ -380,10 +380,10 @@ function CreateGift() {
             style={{
               width: "100%",
               padding: "12px",
-              backgroundColor: "rgba(255,255,255,0.1)",
-              border: "1px solid rgba(255,255,255,0.2)",
+              backgroundColor: "#f5f0e8",
+              border: "1px solid #bd7880",
               borderRadius: "8px",
-              color: "white",
+              color: "#4d0011",
               fontSize: "16px",
             }}
           />
@@ -411,7 +411,7 @@ function CreateGift() {
           />
           <p
             style={{
-              color: "white",
+              color: "#4d0011",
               fontSize: "18px",
               margin: 0,
             }}

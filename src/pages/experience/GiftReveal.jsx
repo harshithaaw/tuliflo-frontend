@@ -33,7 +33,7 @@ function GiftReveal({ giftData }) {
           src={tulifloLogo}
           alt="Tuliflo Logo"
           style={{
-            height: "100px",
+            height: "160px",
             objectFit: "contain",
             filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))"
           }}
@@ -51,12 +51,13 @@ function GiftReveal({ giftData }) {
       </div>
 
       {/* Center: Flower Plant */}
-      <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
-       <div
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+        <div
           onClick={() => setActiveCard("plant")}
           style={{
             cursor: "pointer",
             transition: "transform 0.3s",
+            animation: "float 3s ease-in-out infinite",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = "scale(1.05)";
@@ -66,16 +67,30 @@ function GiftReveal({ giftData }) {
           }}
         >
           <img
-            src={lilyImg}
-            alt={`${giftData.flowerType || "Lily"} flower`}
+            src={plantImg}
+            alt={`${giftData.flowerType || "Plant"} flower`}
             style={{
-              width: "300px",
-              height: "300px",
+              width: "420px",
+              height: "420px",
               objectFit: "contain",
               filter: "drop-shadow(0 8px 32px rgba(0,0,0,0.3))",
             }}
           />
         </div>
+        
+        <p
+          style={{
+            marginTop: "20px",
+            fontSize: "18px",
+            fontWeight: "500",
+            color: "#bd7880",
+            fontFamily: "'Caveat', cursive",
+            textAlign: "center",
+            textShadow: "0 2px 4px rgba(0,0,0,0.1)"
+          }}
+        >
+          flowers for you
+        </p>
 
         {/* Expanded plant view */}
         {activeCard === "plant" && (

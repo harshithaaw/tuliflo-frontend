@@ -52,20 +52,20 @@ function Login() {
         marginTop: '-30px'
       }}>
         <div style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          backgroundColor: '#f5f0e8',
           padding: '40px',
           borderRadius: '20px',
           width: '100%',
           maxWidth: '400px',
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-          border: '2px solid rgba(255, 182, 193, 0.3)',
+          border: '2px solid #bd7880',
           marginTop: '-40px'
         }}>
           <h1 style={{ 
             textAlign: 'center', 
             marginBottom: '30px', 
             fontSize: '2.5rem',
-            color: '#C62828'
+            color: '#4d0011'
           }}>
             Login
           </h1>
@@ -76,7 +76,7 @@ function Login() {
                 display: 'block', 
                 marginBottom: '8px', 
                 fontSize: '1.3rem',
-                color: '#333'
+                color: '#4d0011'
               }}>
                 Username
               </label>
@@ -91,8 +91,8 @@ function Login() {
                   padding: '12px',
                   fontSize: '1rem',
                   borderRadius: '10px',
-                  border: '2px solid #FFB6C1',
-                  backgroundColor: 'white',
+                  border: '2px solid #bd7880',
+                  backgroundColor: '#f5f0e8',
                   fontFamily: 'Arial, sans-serif'
                 }}
               />
@@ -103,7 +103,7 @@ function Login() {
                 display: 'block', 
                 marginBottom: '8px', 
                 fontSize: '1.3rem',
-                color: '#333'
+                color: '#4d0011'
               }}>
                 Password
               </label>
@@ -118,8 +118,8 @@ function Login() {
                   padding: '12px',
                   fontSize: '1rem',
                   borderRadius: '10px',
-                  border: '2px solid #FFB6C1',
-                  backgroundColor: 'white',
+                  border: '2px solid #bd7880',
+                  backgroundColor: '#f5f0e8',
                   fontFamily: 'Arial, sans-serif'
                 }}
               />
@@ -127,7 +127,7 @@ function Login() {
 
             {error && (
               <p style={{ 
-                color: '#C62828', 
+                color: '#4d0011', 
                 marginBottom: '15px', 
                 fontSize: '1.1rem',
                 textAlign: 'center',
@@ -147,19 +147,19 @@ function Login() {
                 padding: '14px',
                 fontSize: '1.3rem',
                 fontFamily: 'Caveat, cursive',
-                backgroundColor: loading ? '#FFB6C1' : '#C62828',
+                backgroundColor: loading ? '#6b0016' : '#4d0011',
                 color: 'white',
                 border: 'none',
                 borderRadius: '25px',
                 cursor: loading ? 'not-allowed' : 'pointer',
                 transition: 'all 0.3s',
-                boxShadow: '0 4px 12px rgba(198, 40, 40, 0.3)'
+                boxShadow: '0 4px 12px rgba(189, 120, 128, 0.3)'
               }}
               onMouseEnter={(e) => {
-                if (!loading) e.target.style.backgroundColor = '#A52020';
+                if (!loading) e.target.style.backgroundColor = '#bd7880';
               }}
               onMouseLeave={(e) => {
-                if (!loading) e.target.style.backgroundColor = '#C62828';
+                if (!loading) e.target.style.backgroundColor = '#4d0011';
               }}
             >
               {loading ? 'Logging in...' : 'Login'}
@@ -174,7 +174,7 @@ function Login() {
           }}>
             Don't have an account?{' '}
             <Link to="/register" style={{ 
-              color: '#C62828', 
+              color: '#4d0011', 
               fontWeight: 'bold',
               textDecoration: 'none'
             }}>
@@ -187,8 +187,8 @@ function Login() {
       {/* Gingham border at bottom */}
       <div style={{
         height: '80px',
-        background: 'repeating-linear-gradient(90deg, #FFB6C1 0px, #FFB6C1 20px, #FFC0CB 20px, #FFC0CB 40px, white 40px, white 60px, #FFC0CB 60px, #FFC0CB 80px)',
-        borderTop: '3px solid #FFB6C1'
+        background: '#ffd9d9',
+        borderTop: '3px solid #bd7880'
       }} />
     </div>
   );

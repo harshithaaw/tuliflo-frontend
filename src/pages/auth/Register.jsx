@@ -56,7 +56,7 @@ function Register() {
         padding: '20px'
       }}>
         <div style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          backgroundColor: '#f5f0e8',
           padding: '25px 30px',  // ✅ Reduced padding
           borderRadius: '16px',  // ✅ Slightly smaller radius
           width: '100%',
@@ -68,7 +68,7 @@ function Register() {
             textAlign: 'center', 
             marginBottom: '20px',  // ✅ Reduced from 30px
             fontSize: '2.2rem',  // ✅ Slightly smaller
-            color: '#C62828'
+            color: '#4d0011'
           }}>
             Register
           </h1>
@@ -79,7 +79,7 @@ function Register() {
                 display: 'block', 
                 marginBottom: '6px',  // ✅ Reduced from 8px
                 fontSize: '1.2rem',  // ✅ Reduced from 1.3rem
-                color: '#333'
+                color: '#4d0011'
               }}>
                 Username
               </label>
@@ -94,8 +94,8 @@ function Register() {
                   padding: '10px',  // ✅ Reduced from 12px
                   fontSize: '0.95rem',  // ✅ Slightly smaller
                   borderRadius: '8px',  // ✅ Reduced from 10px
-                  border: '1px solid #FFB6C1',  // ✅ Thinner border (was 2px)
-                  backgroundColor: 'white',
+                  border: '1px solid #bd7880',  // ✅ Thinner border (was 2px)
+                  backgroundColor: '#f5f0e8',
                   fontFamily: 'Arial, sans-serif'
                 }}
               />
@@ -106,7 +106,7 @@ function Register() {
                 display: 'block', 
                 marginBottom: '6px',
                 fontSize: '1.2rem',
-                color: '#333'
+                color: '#4d0011'
               }}>
                 Email
               </label>
@@ -121,8 +121,8 @@ function Register() {
                   padding: '10px',
                   fontSize: '0.95rem',
                   borderRadius: '8px',
-                  border: '1px solid #FFB6C1',
-                  backgroundColor: 'white',
+                  border: '1px solid #bd7880',
+                  backgroundColor: '#f5f0e8',
                   fontFamily: 'Arial, sans-serif'
                 }}
               />
@@ -133,7 +133,7 @@ function Register() {
                 display: 'block', 
                 marginBottom: '6px',
                 fontSize: '1.2rem',
-                color: '#333'
+                color: '#4d0011'
               }}>
                 Password
               </label>
@@ -148,8 +148,8 @@ function Register() {
                   padding: '10px',
                   fontSize: '0.95rem',
                   borderRadius: '8px',
-                  border: '1px solid #FFB6C1',
-                  backgroundColor: 'white',
+                  border: '1px solid #bd7880',
+                  backgroundColor: '#f5f0e8',
                   fontFamily: 'Arial, sans-serif'
                 }}
               />
@@ -157,7 +157,7 @@ function Register() {
 
             {error && (
               <p style={{ 
-                color: '#C62828', 
+                color: '#4d0011', 
                 marginBottom: '12px',  // ✅ Reduced
                 fontSize: '1rem',  // ✅ Reduced
                 textAlign: 'center',
@@ -171,11 +171,11 @@ function Register() {
 
             {success && (
               <p style={{ 
-                color: '#2E7D32', 
+                color: '#2E7D32',
                 marginBottom: '12px',
                 fontSize: '1rem',
                 textAlign: 'center',
-                backgroundColor: 'rgba(46, 125, 50, 0.1)',
+                backgroundColor: 'rgba(189, 120, 128, 0.1)',
                 padding: '8px',
                 borderRadius: '6px'
               }}>
@@ -191,13 +191,13 @@ function Register() {
                 padding: '12px',  // ✅ Reduced from 14px
                 fontSize: '1.2rem',  // ✅ Reduced from 1.3rem
                 fontFamily: 'Caveat, cursive',
-                backgroundColor: loading ? '#FFB6C1' : '#C62828',
+                backgroundColor: loading ? '#6b0016' : '#4d0011',
                 color: 'white',
                 border: 'none',
                 borderRadius: '20px',  // ✅ Reduced from 25px
                 cursor: loading ? 'not-allowed' : 'pointer',
                 transition: 'all 0.3s',
-                boxShadow: '0 4px 12px rgba(198, 40, 40, 0.3)'
+                boxShadow: '0 4px 12px rgba(189, 120, 128, 0.3)'
               }}
               onMouseEnter={(e) => {
                 if (!loading) e.target.style.backgroundColor = '#A52020';
@@ -218,7 +218,7 @@ function Register() {
           }}>
             Already have an account?{' '}
             <Link to="/login" style={{ 
-              color: '#C62828', 
+              color: '#4d0011', 
               fontWeight: 'bold',
               textDecoration: 'none'
             }}>
@@ -228,12 +228,11 @@ function Register() {
         </div>
       </div>
 
-      {/* Gingham border at bottom */}
+      {/* Bottom border strip */}
       <div style={{
         height: '80px',
-        background: 'repeating-linear-gradient(90deg, #FFB6C1 0px, #FFB6C1 20px, #FFC0CB 20px, #FFC0CB 40px, white 40px, white 60px, #FFC0CB 60px, #FFC0CB 80px)',
-        borderTop: '3px solid #FFB6C1',
-        marginTop: 'auto'  // ✅ Pushes to bottom
+        background: '#ffd9d9',
+        borderTop: '3px solid #bd7880'
       }} />
     </div>
   );
