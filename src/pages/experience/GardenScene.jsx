@@ -185,6 +185,23 @@ function GardenScene({ onWaterComplete }) {
             }}
           />
         ))}
+        {/* Click hint text */}
+          <div style={{
+            position: "absolute",
+            top: "-80px",
+            left: "52%",
+            transform: "translateX(-50%)",
+            fontSize: "18px",
+            fontFamily: "'Nunito', sans-serif",
+            color: "#00260c",
+            letterSpacing: "0.05em",
+            whiteSpace: "nowrap",
+            opacity: 0.85,
+            pointerEvents: "none",
+            zIndex: 11
+          }}>
+                              click to grow!
+          </div>
 
         {/* Seed - half above, half below ground line */}
         <motion.div

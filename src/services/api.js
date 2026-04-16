@@ -1,8 +1,13 @@
 import axios from 'axios';
 
+// Dynamic baseURL - connects to localhost in development, deployed backend in production
+const baseURL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:8080'
+  : 'https://tuliflo-backend.onrender.com';
+
 // Create axios instance
 const api = axios.create({
-  baseURL: 'https://tuliflo-backend.onrender.com'
+  baseURL: baseURL
 });
 
 // Request interceptor - Add token to headers

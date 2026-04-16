@@ -187,15 +187,23 @@ function CreateGift() {
   // ── Main Form ─────────────────────────────────────────────────────────────
   return (
     <div style={{
-      minHeight: "100vh", backgroundColor: "#0a0a1f",
+      minHeight: "100vh", backgroundColor: "#102b1f",
       display: "flex", alignItems: "center", justifyContent: "center",
       padding: "20px", fontFamily: "'Caveat', cursive",
     }}>
-      <form onSubmit={handleSubmit} style={{ maxWidth: "500px", width: "100%" }}>
+      <form onSubmit={handleSubmit} style={{ 
+        maxWidth: "500px", 
+        width: "100%",
+        backgroundColor: "rgba(255, 216, 216, 0.9)",
+        padding: "30px",
+        borderRadius: "16px",
+        border: "1px solid rgba(189, 120, 128, 0.4)",
+        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.15)"
+      }}>
 
         <h1 style={{
-          color: "white", fontSize: "36px", textAlign: "center",
-          marginBottom: "30px", fontWeight: "600",
+          color: "#4d0011", fontSize: "36px", textAlign: "center",
+          marginBottom: "30px", fontWeight: "600", textShadow: "0 1px 2px rgba(0,0,0,0.1)",
         }}>
           Create Your Digital Gift
         </h1>
@@ -232,9 +240,9 @@ function CreateGift() {
             <button type="button" onClick={() => setMusicMode("upload")} style={{
               flex: 1, padding: "10px", borderRadius: "10px", fontSize: "15px",
               fontFamily: "'Caveat', cursive", cursor: "pointer", transition: "all 0.3s",
-              backgroundColor: musicMode === "upload" ? "rgba(247,168,184,0.25)" : "rgba(255,255,255,0.05)",
-              border: musicMode === "upload" ? "2px solid rgba(247,168,184,0.8)" : "2px solid rgba(255,255,255,0.1)",
-              color: musicMode === "upload" ? "rgba(247,168,184,1)" : "rgba(255,255,255,0.5)",
+              backgroundColor: musicMode === "upload" ? "rgba(77, 0, 17, 0.1)" : "rgba(77, 0, 17, 0.05)",
+              border: musicMode === "upload" ? "2px solid #4d0011" : "2px solid rgba(77, 0, 17, 0.3)",
+              color: musicMode === "upload" ? "#4d0011" : "rgba(77, 0, 17, 0.7)",
               fontWeight: musicMode === "upload" ? "700" : "400",
             }}>
               🎵 Upload MP3
@@ -242,9 +250,9 @@ function CreateGift() {
             <button type="button" onClick={() => setMusicMode("youtube")} style={{
               flex: 1, padding: "10px", borderRadius: "10px", fontSize: "15px",
               fontFamily: "'Caveat', cursive", cursor: "pointer", transition: "all 0.3s",
-              backgroundColor: musicMode === "youtube" ? "rgba(255,0,0,0.15)" : "rgba(255,255,255,0.05)",
-              border: musicMode === "youtube" ? "2px solid rgba(255,80,80,0.8)" : "2px solid rgba(255,255,255,0.1)",
-              color: musicMode === "youtube" ? "rgba(255,100,100,1)" : "rgba(255,255,255,0.5)",
+              backgroundColor: musicMode === "youtube" ? "rgba(255, 68, 68, 0.15)" : "rgba(77, 0, 17, 0.05)",
+              border: musicMode === "youtube" ? "2px solid rgba(255, 68, 68, 0.5)" : "2px solid rgba(77, 0, 17, 0.3)",
+              color: musicMode === "youtube" ? "#d63638" : "rgba(77, 0, 17, 0.7)",
               fontWeight: musicMode === "youtube" ? "700" : "400",
             }}>
               ▶ YouTube Link
@@ -303,7 +311,7 @@ function CreateGift() {
                 ✅ Valid YouTube URL
               </p>
             )}
-            <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", margin: "6px 0 0 0" }}>
+            <p style={{ color: "rgba(0, 0, 0, 0.3)", fontSize: "13px", margin: "6px 0 0 0" }}>
               Paste any YouTube video link — it will play in the gift
             </p>
           </div>
@@ -325,26 +333,29 @@ function CreateGift() {
 
         {/* Flower Preview */}
         <div style={{
-          textAlign: "center", marginBottom: "30px", padding: "20px",
+          textAlign: "center", marginBottom: "30px", padding: "15px",
           backgroundColor: "rgba(255,255,255,0.05)", borderRadius: "8px",
         }}>
+          <p style={{ color: "#4d0011", fontSize: "16px", margin: "0 0 10px 0", fontWeight: "500" }}>
+            Choose flower you'd like to send
+          </p>
           <img src={lilyImg} alt="Lily flower"
-            style={{ width: "150px", height: "150px", objectFit: "contain", marginBottom: "10px" }} />
-          <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "18px", margin: 0 }}>Lily</p>
+            style={{ width: "120px", height: "120px", objectFit: "contain", marginBottom: "8px" }} />
+          <p style={{ color: "#4d0011", fontSize: "16px", margin: 0 }}>Lily</p>
         </div>
 
         {/* Submit */}
         <button type="submit" disabled={loading} style={{
           width: "100%",
-          backgroundColor: loading ? "rgba(78,205,196,0.5)" : "#4ecdc4",
-          border: "none", color: "#0a0a1f", padding: "15px",
+          backgroundColor: loading ? "rgba(0, 0, 0, 0.7)" : "#000000",
+          border: "none", color: "#f5f0e8", padding: "15px",
           borderRadius: "25px", fontSize: "18px", fontWeight: "600",
           cursor: loading ? "not-allowed" : "pointer", transition: "all 0.3s",
         }}
           onMouseEnter={(e) => {
             if (!loading) {
               e.target.style.transform = "translateY(-2px)"
-              e.target.style.boxShadow = "0 4px 16px rgba(78,205,196,0.3)"
+              e.target.style.boxShadow = "0 4px 16px rgba(0, 0, 0, 0.4)"
             }
           }}
           onMouseLeave={(e) => {
@@ -363,15 +374,16 @@ function CreateGift() {
 
 // ── Style helpers ─────────────────────────────────────────────────────────────
 const labelStyle = {
-  color: "rgba(255,255,255,0.8)", fontSize: "18px",
-  marginBottom: "8px", display: "block",
+  color: "#4d0011", fontSize: "18px",
+  marginBottom: "8px", display: "block", fontWeight: "600",
 }
 
 const inputStyle = {
   width: "100%", padding: "12px",
-  backgroundColor: "#f5f0e8", border: "1px solid #bd7880",
+  backgroundColor: "rgba(245,240,232,0.95)", border: "2px solid #bd7880",
   borderRadius: "8px", color: "#4d0011",
-  fontSize: "16px", boxSizing: "border-box",
+  fontSize: "16px", boxSizing: "border-box", fontFamily: "'Caveat', cursive",
+  transition: "all 0.3s",
 }
 
 const btnStyle = (bg, color) => ({
